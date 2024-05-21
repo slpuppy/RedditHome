@@ -1,25 +1,11 @@
 //
-//  Models.swift
+//  PostData.swift
 //  RedditHome
 //
 //  Created by Gabriel Puppi on 21/05/24.
 //
 
 import Foundation
-
-struct RedditResponse: Codable {
-    let kind: String
-    let data: RedditData
-}
-
-struct RedditData: Codable {
-   let children: [RedditPost]
-}
-
-struct RedditPost: Codable {
-    let kind: String
-    let data: PostData
-}
 
 struct PostData: Codable {
     let subreddit: String
