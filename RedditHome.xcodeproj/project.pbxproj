@@ -234,11 +234,27 @@
 		754C01822BFCEBC500465C2B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				754C018F2BFD606300465C2B /* Cells */,
+				754C018E2BFD605500465C2B /* SwiftUi */,
 				754C01832BFCEBE400465C2B /* RedditHomeViewController.swift */,
-				754C01852BFCEF0200465C2B /* HomePostCell.swift */,
-				754C018C2BFD5F5900465C2B /* PostDetailsView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		754C018E2BFD605500465C2B /* SwiftUi */ = {
+			isa = PBXGroup;
+			children = (
+				754C018C2BFD5F5900465C2B /* PostDetailsView.swift */,
+			);
+			path = SwiftUi;
+			sourceTree = "<group>";
+		};
+		754C018F2BFD606300465C2B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				754C01852BFCEF0200465C2B /* HomePostCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

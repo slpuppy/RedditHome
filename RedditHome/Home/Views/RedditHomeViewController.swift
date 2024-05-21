@@ -118,15 +118,20 @@ class RedditHomeViewController: UIViewController {
 
     @MainActor
     private func reloadPosts() {
-        self.collectionView.performBatchUpdates {
+        self.collectionView.performBatchUpdates({
             self.collectionView.reloadSections(.init(integer: 0))
-        }
+        }, completion: nil)
     }
     
 }
 
 // MARK: Delegate methods
 
+extension RedditHomeViewController: HomePostCellDelegate {
+    func reloadCells() {
+        collectionView.performBatchUpdates(nil, completion: nil)
+    }
+}
 
 extension RedditHomeViewController: UICollectionViewDataSource {
     
@@ -139,6 +144,7 @@ extension RedditHomeViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
        let post = viewModel.posts[indexPath.item]     
+        cell.delegate = self
        cell.layer.cornerRadius = 10
        cell.configure(with: post.data)
        return cell
@@ -161,31 +167,6 @@ extension RedditHomeViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-    }
-}
-
-extension RedditHomeViewController {
-    
-    func scrollToTop(completion: (() -> Void)? = nil) {
-        let indexPath = IndexPath(item: 0, section: 0)
-        collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            completion?()
-        }
-    }
-    
-    func shouldScrollToTop() -> Bool {
-        let yOffsetThreshold: CGFloat = 16
-        return collectionView.contentOffset.y > yOffsetThreshold
-    }
-    
-    func scrollToTopIfNeeded(completion: (() -> Void)? = nil) {
-        if shouldScrollToTop() {
-            scrollToTop(completion: completion)
-        } else {
-            completion?()
-        }
     }
 }
 

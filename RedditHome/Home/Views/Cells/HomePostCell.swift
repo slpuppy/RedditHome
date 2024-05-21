@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 
 protocol HomePostCellDelegate: AnyObject {
-    func didLoadImage(postId: String)
+   func reloadCells()
 }
 
 class HomePostCell: UICollectionViewCell {
@@ -66,6 +66,8 @@ class HomePostCell: UICollectionViewCell {
         label.textColor = .white
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
     
@@ -74,8 +76,8 @@ class HomePostCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 10
-        imageView.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        imageView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        imageView.setContentHuggingPriority(.defaultLow, for: .vertical)
+        imageView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -83,10 +85,13 @@ class HomePostCell: UICollectionViewCell {
     private lazy var contentStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [titleLabel, imageView])
         stackView.axis = .vertical
+        stackView.distribution = .fill
         stackView.spacing = 16
-        stackView.translatesAutoresizingMaskIntoConstraints =  false
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
+    private var imageHeightConstraint: NSLayoutConstraint?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -97,7 +102,6 @@ class HomePostCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     private func setupSubviews() {
         self.backgroundColor = UIColor(hex: "212121")
@@ -119,10 +123,6 @@ class HomePostCell: UICollectionViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            imageView.widthAnchor.constraint(equalTo: contentStackView.widthAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
             contentStackView.topAnchor.constraint(equalTo: upVotesStackView.bottomAnchor, constant: 16),
             contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
@@ -130,26 +130,36 @@ class HomePostCell: UICollectionViewCell {
         ])
     }
     
-    var imageHeightAnchor: NSLayoutConstraint?
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.sd_cancelCurrentImageLoad()
+        imageView.image = nil
+        imageView.isHidden = true
+        imageHeightConstraint?.isActive = false
+    }
     
     func configure(with postData: PostData) {
         self.titleLabel.text = postData.title
         self.authorLabel.text = "\(postData.author) at r/\(postData.subreddit)"
         self.upVotesLabel.text = "\(postData.ups)"
-        if let url = URL(string: postData.thumbnail) {
-            if postData.thumbnail != "self" {
-                imageView.isHidden = false
-                self.imageView.downloaded(from: url, placeholder: UIImage(named: "placeholder")) { [weak self] image in
-                    guard let self, let image else { return }
-                    imageHeightAnchor?.isActive = false
-                    imageHeightAnchor = imageView.heightAnchor.constraint(equalTo: contentStackView.widthAnchor, multiplier: image.size.height / image.size.width)
-                    imageHeightAnchor?.isActive = true
-                }
-            } else {
-                imageView.isHidden = true
+        
+        if let url = URL(string: postData.thumbnail), postData.thumbnail != "self" {
+            imageView.isHidden = false
+            imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder")) { [weak self] image, _, _, _ in
+                guard let self = self, let image = image else { return }
+                imageHeightConstraint = imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: image.size.height / image.size.width)
+                imageHeightConstraint?.isActive = true
+                setNeedsLayout()
+                layoutIfNeeded()
+                delegate?.reloadCells()
             }
         } else {
-            
+            imageView.isHidden = true
+            imageHeightConstraint = imageView.heightAnchor.constraint(equalToConstant: 0)
+            imageHeightConstraint?.isActive = true
+            self.setNeedsLayout()
+            self.layoutIfNeeded()
+            delegate?.reloadCells()
         }
     }
 }
