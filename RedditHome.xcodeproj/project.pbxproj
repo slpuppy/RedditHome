@@ -14,7 +14,6 @@
 		754C01452BFCE30900465C2B /* RedditHomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C01442BFCE30900465C2B /* RedditHomeTests.swift */; };
 		754C014F2BFCE30900465C2B /* RedditHomeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C014E2BFCE30900465C2B /* RedditHomeUITests.swift */; };
 		754C01512BFCE30900465C2B /* RedditHomeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C01502BFCE30900465C2B /* RedditHomeUITestsLaunchTests.swift */; };
-		754C01602BFCE32400465C2B /* UIImageView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C015E2BFCE32400465C2B /* UIImageView + Extension.swift */; };
 		754C01612BFCE32400465C2B /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C015F2BFCE32400465C2B /* UIColor + Extension.swift */; };
 		754C01642BFCE39A00465C2B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C01632BFCE39A00465C2B /* Coordinator.swift */; };
 		754C01662BFCE3A300465C2B /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C01652BFCE3A300465C2B /* MainCoordinator.swift */; };
@@ -31,6 +30,9 @@
 		754C01812BFCEBBB00465C2B /* RedditHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C01802BFCEBBB00465C2B /* RedditHomeViewModel.swift */; };
 		754C01842BFCEBE400465C2B /* RedditHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C01832BFCEBE400465C2B /* RedditHomeViewController.swift */; };
 		754C01862BFCEF0200465C2B /* HomePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C01852BFCEF0200465C2B /* HomePostCell.swift */; };
+		754C01892BFD2C0300465C2B /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 754C01882BFD2C0300465C2B /* SDWebImage */; };
+		754C018B2BFD49C200465C2B /* UIImageView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C018A2BFD49C200465C2B /* UIImageView + Extension.swift */; };
+		754C018D2BFD5F5900465C2B /* PostDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C018C2BFD5F5900465C2B /* PostDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +64,6 @@
 		754C014A2BFCE30900465C2B /* RedditHomeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RedditHomeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		754C014E2BFCE30900465C2B /* RedditHomeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditHomeUITests.swift; sourceTree = "<group>"; };
 		754C01502BFCE30900465C2B /* RedditHomeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditHomeUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		754C015E2BFCE32400465C2B /* UIImageView + Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView + Extension.swift"; sourceTree = "<group>"; };
 		754C015F2BFCE32400465C2B /* UIColor + Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
 		754C01632BFCE39A00465C2B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		754C01652BFCE3A300465C2B /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainCoordinator.swift; path = ../../../../MainCoordinator.swift; sourceTree = "<group>"; };
@@ -79,6 +80,8 @@
 		754C01802BFCEBBB00465C2B /* RedditHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditHomeViewModel.swift; sourceTree = "<group>"; };
 		754C01832BFCEBE400465C2B /* RedditHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditHomeViewController.swift; sourceTree = "<group>"; };
 		754C01852BFCEF0200465C2B /* HomePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostCell.swift; sourceTree = "<group>"; };
+		754C018A2BFD49C200465C2B /* UIImageView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Extension.swift"; sourceTree = "<group>"; };
+		754C018C2BFD5F5900465C2B /* PostDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				754C01892BFD2C0300465C2B /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,6 +133,7 @@
 		754C012C2BFCE30800465C2B /* RedditHome */ = {
 			isa = PBXGroup;
 			children = (
+				754C01732BFCE58500465C2B /* Models.swift */,
 				754C012D2BFCE30800465C2B /* AppDelegate.swift */,
 				754C012F2BFCE30800465C2B /* SceneDelegate.swift */,
 				754C015D2BFCE32400465C2B /* Extensions */,
@@ -163,8 +168,8 @@
 		754C015D2BFCE32400465C2B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				754C015E2BFCE32400465C2B /* UIImageView + Extension.swift */,
 				754C015F2BFCE32400465C2B /* UIColor + Extension.swift */,
+				754C018A2BFD49C200465C2B /* UIImageView + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -186,7 +191,6 @@
 				754C016C2BFCE46B00465C2B /* HTTPMethod.swift */,
 				754C016E2BFCE48500465C2B /* ApiErrorResponse.swift */,
 				754C017B2BFCE81500465C2B /* Services */,
-				754C01732BFCE58500465C2B /* Models.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -232,6 +236,7 @@
 			children = (
 				754C01832BFCEBE400465C2B /* RedditHomeViewController.swift */,
 				754C01852BFCEF0200465C2B /* HomePostCell.swift */,
+				754C018C2BFD5F5900465C2B /* PostDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -252,6 +257,9 @@
 			dependencies = (
 			);
 			name = RedditHome;
+			packageProductDependencies = (
+				754C01882BFD2C0300465C2B /* SDWebImage */,
+			);
 			productName = RedditHome;
 			productReference = 754C012A2BFCE30800465C2B /* RedditHome.app */;
 			productType = "com.apple.product-type.application";
@@ -324,6 +332,9 @@
 				Base,
 			);
 			mainGroup = 754C01212BFCE30800465C2B;
+			packageReferences = (
+				754C01872BFD2C0300465C2B /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 754C012B2BFCE30800465C2B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -366,7 +377,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				754C01602BFCE32400465C2B /* UIImageView + Extension.swift in Sources */,
 				754C01662BFCE3A300465C2B /* MainCoordinator.swift in Sources */,
 				754C012E2BFCE30800465C2B /* AppDelegate.swift in Sources */,
 				754C01742BFCE58500465C2B /* Models.swift in Sources */,
@@ -374,7 +384,9 @@
 				754C01762BFCE64800465C2B /* RedditResponseParserProtocol.swift in Sources */,
 				754C01302BFCE30800465C2B /* SceneDelegate.swift in Sources */,
 				754C017A2BFCE72100465C2B /* RedditHomeDataNetworkingServiceProtocol.swift in Sources */,
+				754C018D2BFD5F5900465C2B /* PostDetailsView.swift in Sources */,
 				754C016D2BFCE46B00465C2B /* HTTPMethod.swift in Sources */,
+				754C018B2BFD49C200465C2B /* UIImageView + Extension.swift in Sources */,
 				754C016A2BFCE41A00465C2B /* ApiEndpointProtocol + Extension.swift in Sources */,
 				754C01812BFCEBBB00465C2B /* RedditHomeViewModel.swift in Sources */,
 				754C01612BFCE32400465C2B /* UIColor + Extension.swift in Sources */,
@@ -558,6 +570,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C7K95G5W2H;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RedditHome/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -584,6 +597,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C7K95G5W2H;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RedditHome/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -715,6 +729,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		754C01872BFD2C0300465C2B /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.19.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		754C01882BFD2C0300465C2B /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 754C01872BFD2C0300465C2B /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 754C01222BFCE30800465C2B /* Project object */;
 }

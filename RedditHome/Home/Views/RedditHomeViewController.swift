@@ -70,10 +70,10 @@ class RedditHomeViewController: UIViewController {
     
     private func createCompositionalLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .absolute(260))
+                                              heightDimension: .estimated(120))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .absolute(260))
+                                               heightDimension: .estimated(120))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 16
@@ -94,7 +94,7 @@ class RedditHomeViewController: UIViewController {
             case .success:
                 await MainActor.run {
                     self.refreshControl.endRefreshing()
-                    self.reloadArticles()
+                    self.reloadPosts()
                 }
             case .failure(let error):
                 handleError(error: error)
@@ -117,7 +117,7 @@ class RedditHomeViewController: UIViewController {
     }
 
     @MainActor
-    private func reloadArticles() {
+    private func reloadPosts() {
         self.collectionView.performBatchUpdates {
             self.collectionView.reloadSections(.init(integer: 0))
         }
@@ -126,6 +126,7 @@ class RedditHomeViewController: UIViewController {
 }
 
 // MARK: Delegate methods
+
 
 extension RedditHomeViewController: UICollectionViewDataSource {
     
@@ -137,11 +138,10 @@ extension RedditHomeViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomePostCell", for: indexPath) as? HomePostCell else {
             return UICollectionViewCell()
         }
-        
-        let post = viewModel.posts[indexPath.item]
-        cell.configure(with: post.data)
-        cell.layer.cornerRadius = 10
-        return cell
+       let post = viewModel.posts[indexPath.item]     
+       cell.layer.cornerRadius = 10
+       cell.configure(with: post.data)
+       return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
