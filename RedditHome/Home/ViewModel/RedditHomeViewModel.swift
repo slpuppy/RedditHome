@@ -34,7 +34,7 @@ class RedditHomeViewModel: RedditHomeViewModelProtocol {
         let result = await networkingService.getHomeData()
             switch result {
             case .success(let posts):
-                self.posts = posts.data.children
+                self.posts = self.filterThumbnailURL(posts: posts.data.children)
                 return .success(())
             case .failure(let error):
                 return .failure(error)
@@ -47,7 +47,13 @@ func presentPost(postIndex: Int){
     }
     
     // MARK: Private Methods
-       
-
+    
+    private func filterThumbnailURL(posts: [RedditPost]) -> [RedditPost] {
+        let filteredPosts = posts.filter { post in
+            let thumbnailURL = post.data.thumbnail
+            return thumbnailURL.contains("thumbs.redditmedia.com") && thumbnailURL.hasSuffix(".jpg")
+        }
+        return filteredPosts
+    }
 }
 

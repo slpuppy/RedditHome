@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 
 protocol HomePostCellDelegate: AnyObject {
-   func reloadCells()
+   func didLoadImage()
 }
 
 class HomePostCell: UICollectionViewCell {
@@ -39,8 +39,8 @@ class HomePostCell: UICollectionViewCell {
         imageView.tintColor = .white
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.heightAnchor.constraint(equalToConstant: 16).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 16).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 18).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 18).isActive = true
         return imageView
     }()
     
@@ -53,7 +53,8 @@ class HomePostCell: UICollectionViewCell {
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 6)
         stackView.backgroundColor = UIColor(hex: "171717")
-        stackView.layer.cornerRadius = 12
+        stackView.layer.cornerRadius = 8
+        stackView.layer.cornerCurve = .continuous
         stackView.clipsToBounds = true
         stackView.setContentHuggingPriority(.required, for: .horizontal)
         stackView.setContentCompressionResistancePriority(.required, for: .horizontal)
@@ -91,6 +92,36 @@ class HomePostCell: UICollectionViewCell {
         return stackView
     }()
     
+    
+    private lazy var commentsIcon: UIImageView = {
+        let imageView = UIImageView(image: UIImage(systemName: "bubble.left"))
+        imageView.tintColor = .white
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 16).isActive = true
+        return imageView
+    }()
+    
+    private lazy var commentsLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
+        return label
+    }()
+ 
+    private lazy var commentsStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [commentsIcon, commentsLabel])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = 4
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        return stackView
+    }()
+    
     private var imageHeightConstraint: NSLayoutConstraint?
     
     override init(frame: CGRect) {
@@ -108,11 +139,12 @@ class HomePostCell: UICollectionViewCell {
         contentView.addSubview(authorLabel)
         contentView.addSubview(upVotesStackView)
         contentView.addSubview(contentStackView)
+        contentView.addSubview(commentsStackView)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 22),
             authorLabel.leadingAnchor.constraint(equalTo: upVotesStackView.trailingAnchor, constant: 8),
             authorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
         ])
@@ -123,10 +155,17 @@ class HomePostCell: UICollectionViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            contentStackView.topAnchor.constraint(equalTo: upVotesStackView.bottomAnchor, constant: 16),
+            contentStackView.topAnchor.constraint(equalTo: upVotesStackView.bottomAnchor, constant: 12),
             contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+            contentStackView.bottomAnchor.constraint(equalTo: commentsStackView.topAnchor, constant: -16)
+        ])
+        
+        NSLayoutConstraint.activate([
+            commentsStackView.topAnchor.constraint(equalTo: contentStackView.bottomAnchor, constant: 16),
+            commentsStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            commentsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            commentsStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
     }
     
@@ -142,6 +181,7 @@ class HomePostCell: UICollectionViewCell {
         self.titleLabel.text = postData.title
         self.authorLabel.text = "\(postData.author) at r/\(postData.subreddit)"
         self.upVotesLabel.text = "\(postData.ups)"
+        self.commentsLabel.text = "\(postData.num_comments) comments"
         
         if let url = URL(string: postData.thumbnail), postData.thumbnail != "self" {
             imageView.isHidden = false
@@ -151,7 +191,7 @@ class HomePostCell: UICollectionViewCell {
                 imageHeightConstraint?.isActive = true
                 setNeedsLayout()
                 layoutIfNeeded()
-                delegate?.reloadCells()
+                delegate?.didLoadImage()
             }
         } else {
             imageView.isHidden = true
@@ -159,7 +199,7 @@ class HomePostCell: UICollectionViewCell {
             imageHeightConstraint?.isActive = true
             self.setNeedsLayout()
             self.layoutIfNeeded()
-            delegate?.reloadCells()
+            delegate?.didLoadImage()
         }
     }
 }

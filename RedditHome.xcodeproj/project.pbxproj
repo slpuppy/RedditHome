@@ -36,6 +36,7 @@
 		754C01922BFD6BE900465C2B /* RedditResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C01912BFD6BE900465C2B /* RedditResponse.swift */; };
 		754C01942BFD6BF800465C2B /* RedditData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C01932BFD6BF800465C2B /* RedditData.swift */; };
 		754C01962BFD6C0A00465C2B /* RedditPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C01952BFD6C0A00465C2B /* RedditPost.swift */; };
+		754C01982BFE1D9E00465C2B /* Color + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C01972BFE1D9E00465C2B /* Color + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		754C01912BFD6BE900465C2B /* RedditResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditResponse.swift; sourceTree = "<group>"; };
 		754C01932BFD6BF800465C2B /* RedditData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditData.swift; sourceTree = "<group>"; };
 		754C01952BFD6C0A00465C2B /* RedditPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditPost.swift; sourceTree = "<group>"; };
+		754C01972BFE1D9E00465C2B /* Color + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 			children = (
 				754C015F2BFCE32400465C2B /* UIColor + Extension.swift */,
 				754C018A2BFD49C200465C2B /* UIImageView + Extension.swift */,
+				754C01972BFE1D9E00465C2B /* Color + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				754C01722BFCE50200465C2B /* RedditHomeNetworkingService.swift in Sources */,
 				754C01922BFD6BE900465C2B /* RedditResponse.swift in Sources */,
 				754C017D2BFCE83000465C2B /* RedditEndpoint.swift in Sources */,
+				754C01982BFE1D9E00465C2B /* Color + Extension.swift in Sources */,
 				754C016F2BFCE48500465C2B /* ApiErrorResponse.swift in Sources */,
 				754C01942BFD6BF800465C2B /* RedditData.swift in Sources */,
 				754C01842BFCEBE400465C2B /* RedditHomeViewController.swift in Sources */,

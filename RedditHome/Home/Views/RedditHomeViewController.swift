@@ -128,7 +128,7 @@ class RedditHomeViewController: UIViewController {
 // MARK: Delegate methods
 
 extension RedditHomeViewController: HomePostCellDelegate {
-    func reloadCells() {
+    func didLoadImage() {
         collectionView.performBatchUpdates(nil, completion: nil)
     }
 }
