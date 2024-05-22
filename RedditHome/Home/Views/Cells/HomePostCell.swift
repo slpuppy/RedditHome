@@ -178,28 +178,37 @@ class HomePostCell: UICollectionViewCell {
     }
     
     func configure(with postData: PostData) {
-        self.titleLabel.text = postData.title
-        self.authorLabel.text = "\(postData.author) at r/\(postData.subreddit)"
-        self.upVotesLabel.text = "\(postData.ups)"
-        self.commentsLabel.text = "\(postData.num_comments) comments"
-        
-        if let url = URL(string: postData.thumbnail), postData.thumbnail != "self" {
-            imageView.isHidden = false
-            imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder")) { [weak self] image, _, _, _ in
-                guard let self = self, let image = image else { return }
-                imageHeightConstraint = imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: image.size.height / image.size.width)
-                imageHeightConstraint?.isActive = true
-                setNeedsLayout()
-                layoutIfNeeded()
-                delegate?.didLoadImage()
-            }
-        } else {
+        configureLabels(with: postData)
+        configureImageView(with: postData.thumbnail)
+    }
+
+    private func configureLabels(with postData: PostData) {
+        titleLabel.text = postData.title
+        authorLabel.text = "\(postData.author) at r/\(postData.subreddit)"
+        upVotesLabel.text = "\(postData.ups)"
+        commentsLabel.text = "\(postData.num_comments) comments"
+    }
+
+    private func configureImageView(with thumbnail: String) {
+        guard let url = URL(string: thumbnail), !["self", "default"].contains(thumbnail) else {
             imageView.isHidden = true
             imageHeightConstraint = imageView.heightAnchor.constraint(equalToConstant: 0)
             imageHeightConstraint?.isActive = true
+            setNeedsLayout()
+            layoutIfNeeded()
+            delegate?.didLoadImage()
+            return
+        }
+        
+        imageView.isHidden = false
+        imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder")) { [weak self] image, _, _, _ in
+            guard let self = self, let image = image else { return }
+            let aspectRatio = image.size.height / image.size.width
+            self.imageHeightConstraint = self.imageView.heightAnchor.constraint(equalTo: self.imageView.widthAnchor, multiplier: aspectRatio)
+            self.imageHeightConstraint?.isActive = true
             self.setNeedsLayout()
             self.layoutIfNeeded()
-            delegate?.didLoadImage()
+            self.delegate?.didLoadImage()
         }
     }
 }

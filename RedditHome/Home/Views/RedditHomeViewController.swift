@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class RedditHomeViewController: UIViewController {
     
@@ -48,6 +49,10 @@ class RedditHomeViewController: UIViewController {
         setupSubviews()
         setupConstraints()
         self.fetchPosts()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     // MARK: UI Setup
@@ -102,6 +107,12 @@ class RedditHomeViewController: UIViewController {
         }
     }
     
+    private func presentPost(post: RedditPost){
+        let vc = PostDetailsViewController(postData: post.data)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
     @objc private func handleRefresh() {
         fetchPosts()
     }
@@ -115,13 +126,14 @@ class RedditHomeViewController: UIViewController {
             self.showAlert(title: "Unknown Error", message: "An unknown error occurred.")
         }
     }
-
+    
     @MainActor
     private func reloadPosts() {
         self.collectionView.performBatchUpdates({
             self.collectionView.reloadSections(.init(integer: 0))
         }, completion: nil)
     }
+    
     
 }
 
@@ -143,15 +155,15 @@ extension RedditHomeViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomePostCell", for: indexPath) as? HomePostCell else {
             return UICollectionViewCell()
         }
-       let post = viewModel.posts[indexPath.item]     
+        let post = viewModel.posts[indexPath.item]
         cell.delegate = self
-       cell.layer.cornerRadius = 10
-       cell.configure(with: post.data)
-       return cell
+        cell.layer.cornerRadius = 10
+        cell.configure(with: post.data)
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.presentPost(postIndex: indexPath.item)
+        self.presentPost(post: viewModel.posts[indexPath.item])
     }
     
 }
