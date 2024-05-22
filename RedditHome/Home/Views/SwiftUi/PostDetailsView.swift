@@ -7,7 +7,7 @@ struct PostDetailsView: View {
         ZStack {
             ScrollView {
                 VStack(spacing: 16) {
-                    HeaderInfoView(author: postData.author, upVotesCount: postData.ups)
+                    HeaderInfoView(author: postData.author, upVotesCount: postData.ups, createdUTC: postData.created_utc)
                     PostContentView(postData: postData)
                     CommentsView(commentsCount: postData.num_comments)
                 }
