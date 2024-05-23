@@ -14,6 +14,8 @@ protocol HomePostCellDelegate: AnyObject {
 
 class HomePostCell: UICollectionViewCell {
     
+    // MARK: - Properties
+    
     weak var delegate: HomePostCellDelegate?
     
     private lazy var authorLabel: UILabel = {
@@ -124,6 +126,8 @@ class HomePostCell: UICollectionViewCell {
     
     private var imageHeightConstraint: NSLayoutConstraint?
     
+    // MARK: - Initialization
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSubviews()
@@ -134,8 +138,10 @@ class HomePostCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - UI Setup
+    
     private func setupSubviews() {
-        self.backgroundColor = UIColor(hex: "212121")
+        backgroundColor = UIColor(hex: "212121")
         contentView.addSubview(authorLabel)
         contentView.addSubview(upVotesStackView)
         contentView.addSubview(contentStackView)
@@ -169,18 +175,7 @@ class HomePostCell: UICollectionViewCell {
         ])
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        imageView.sd_cancelCurrentImageLoad()
-        imageView.image = nil
-        imageView.isHidden = true
-        imageHeightConstraint?.isActive = false
-    }
-    
-    func configure(with postData: PostData) {
-        configureLabels(with: postData)
-        configureImageView(with: postData.thumbnail)
-    }
+    //MARK: Private Methods
 
     private func configureLabels(with postData: PostData) {
         titleLabel.text = postData.title
@@ -204,11 +199,26 @@ class HomePostCell: UICollectionViewCell {
         imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder")) { [weak self] image, _, _, _ in
             guard let self = self, let image = image else { return }
             let aspectRatio = image.size.height / image.size.width
-            self.imageHeightConstraint = self.imageView.heightAnchor.constraint(equalTo: self.imageView.widthAnchor, multiplier: aspectRatio)
-            self.imageHeightConstraint?.isActive = true
-            self.setNeedsLayout()
-            self.layoutIfNeeded()
-            self.delegate?.didLoadImage()
+            imageHeightConstraint = imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: aspectRatio)
+            imageHeightConstraint?.isActive = true
+            setNeedsLayout()
+            layoutIfNeeded()
+            delegate?.didLoadImage()
         }
+    }
+    
+    // MARK: Public Methods
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.sd_cancelCurrentImageLoad()
+        imageView.image = nil
+        imageView.isHidden = true
+        imageHeightConstraint?.isActive = false
+    }
+    
+    func configure(with postData: PostData) {
+        configureLabels(with: postData)
+        configureImageView(with: postData.thumbnail)
     }
 }

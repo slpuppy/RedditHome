@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct PostDetailsView: View {
+    
     @State var postData: PostData
     
     var body: some View {

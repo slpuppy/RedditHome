@@ -13,9 +13,9 @@ class HomeCollectionViewHeader: UICollectionViewCell {
     
     private lazy var headerTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "REDDITHOME"
+        label.text = "REDDIT"
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .monospacedSystemFont(ofSize: 32, weight: .bold)
+        label.font = .monospacedSystemFont(ofSize: 36, weight: .bold)
         label.textAlignment = .left
         label.textColor = .white
         return label

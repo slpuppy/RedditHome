@@ -20,7 +20,6 @@ class RedditHomeDataNetworkingService: RedditHomeDataNetworkingProtocol {
         session = URLSession(configuration: configuration)
     }
     
-    
     func getHomeData() async -> Result<RedditResponse, Error> {
         
         let endpoint = RedditEndpoint.json
@@ -31,7 +30,7 @@ class RedditHomeDataNetworkingService: RedditHomeDataNetworkingProtocol {
             return .success(parsedData)
         } catch {
             if let urlError = error as? URLError, urlError.code == .timedOut {
-                return .failure(APIErrorResponse(status: "408", code: "timedOut", message: "Request timed out"))
+                return .failure(error)
             }
             print(error)
             return .failure(error)

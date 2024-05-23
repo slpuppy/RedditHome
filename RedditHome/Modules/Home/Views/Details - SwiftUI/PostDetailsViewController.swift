@@ -10,14 +10,18 @@ import SwiftUI
 
 class PostDetailsViewController: UIViewController {
     
+    // MARK: Properties
+    
     private var hostingController: UIHostingController<PostDetailsView>
     
     private var navigationTitle: String
     
+    // MARK: Initialization
+    
     init(postData: PostData) {
         let rootView = PostDetailsView(postData: postData)
         self.navigationTitle = postData.subreddit
-        self.hostingController = UIHostingController(rootView: PostDetailsView(postData: postData))
+        self.hostingController = UIHostingController(rootView: rootView)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -31,6 +35,8 @@ class PostDetailsViewController: UIViewController {
         setup()
         setupConstraints()
     }
+    
+    // MARK: Setup
     
     private func setupNavigationBar(title: String) {
         self.title = "r/\(title)"

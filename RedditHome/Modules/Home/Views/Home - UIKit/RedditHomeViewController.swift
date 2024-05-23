@@ -34,7 +34,6 @@ class RedditHomeViewController: UIViewController {
         return refreshControl
     }()
     
-    
     // MARK: Initialization
     
     init(viewModel: RedditHomeViewModelProtocol) {
@@ -66,7 +65,7 @@ class RedditHomeViewController: UIViewController {
     }
     
     private func setupConstraints() {
-
+        
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -119,7 +118,6 @@ class RedditHomeViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    
     @objc private func handleRefresh() {
         fetchPosts()
     }
@@ -127,11 +125,7 @@ class RedditHomeViewController: UIViewController {
     @MainActor
     private func handleError(error: Error) {
         self.refreshControl.endRefreshing()
-        if let newsError = error as? APIErrorResponse {
-            self.showAlert(title: "An Error ocurred", message: newsError.message ?? "Unknown error")
-        } else {
-            self.showAlert(title: "Unknown Error", message: "An unknown error occurred.")
-        }
+        self.showAlert(title: "Network Error", message: error.localizedDescription)
     }
     
     @MainActor
@@ -178,12 +172,12 @@ extension RedditHomeViewController: UICollectionViewDataSource {
 extension RedditHomeViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-         guard kind == UICollectionView.elementKindSectionHeader else {
-             fatalError("Unexpected supplementary view kind")
-         }
-         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerView", for: indexPath) as! HomeCollectionViewHeader
-         return headerView
-     }
+        guard kind == UICollectionView.elementKindSectionHeader else {
+            fatalError("Unexpected supplementary view kind")
+        }
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerView", for: indexPath) as! HomeCollectionViewHeader
+        return headerView
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width - 20, height: 200)

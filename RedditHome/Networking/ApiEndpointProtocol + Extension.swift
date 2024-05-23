@@ -38,7 +38,6 @@ extension ApiEndpointProtocol {
     var request: URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
-        
         if let body {
             request.httpBody = body
         }
