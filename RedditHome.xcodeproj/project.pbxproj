@@ -42,6 +42,7 @@
 		75709D862BFE6FE7007D5E7F /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75709D852BFE6FE7007D5E7F /* AsyncImageView.swift */; };
 		75709D882BFE701E007D5E7F /* PostContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75709D872BFE701E007D5E7F /* PostContentView.swift */; };
 		75709D8B2BFE79EC007D5E7F /* Int + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75709D8A2BFE79EC007D5E7F /* Int + Extension.swift */; };
+		75709D8D2BFF7E24007D5E7F /* HomeCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75709D8C2BFF7E24007D5E7F /* HomeCollectionViewHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,7 @@
 		75709D852BFE6FE7007D5E7F /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		75709D872BFE701E007D5E7F /* PostContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostContentView.swift; sourceTree = "<group>"; };
 		75709D8A2BFE79EC007D5E7F /* Int + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int + Extension.swift"; sourceTree = "<group>"; };
+		75709D8C2BFF7E24007D5E7F /* HomeCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				754C01852BFCEF0200465C2B /* HomePostCell.swift */,
+				75709D8C2BFF7E24007D5E7F /* HomeCollectionViewHeader.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				754C01612BFCE32400465C2B /* UIColor + Extension.swift in Sources */,
 				75709D862BFE6FE7007D5E7F /* AsyncImageView.swift in Sources */,
 				754C01722BFCE50200465C2B /* RedditHomeNetworkingService.swift in Sources */,
+				75709D8D2BFF7E24007D5E7F /* HomeCollectionViewHeader.swift in Sources */,
 				754C01922BFD6BE900465C2B /* RedditResponse.swift in Sources */,
 				754C017D2BFCE83000465C2B /* RedditEndpoint.swift in Sources */,
 				754C01982BFE1D9E00465C2B /* Color + Extension.swift in Sources */,

@@ -8,6 +8,7 @@
 import Foundation
 
 extension Int {
+    
     func formattedDateString() -> String? {
         let date = Date(timeIntervalSince1970: TimeInterval(self))
         let dateFormatter = DateFormatter()
@@ -28,7 +29,8 @@ extension Int {
             } else if let days = components.day, days > 0 {
                 dateFormatter.dateFormat = "MMM d, HH:mm"
             } else {
-                dateFormatter.dateFormat = "MMM d, HH:mm"
+                dateFormatter.dateFormat = "HH:mm"
+                return "Yesterday, " + dateFormatter.string(from: date)
             }
             
             return dateFormatter.string(from: date)
