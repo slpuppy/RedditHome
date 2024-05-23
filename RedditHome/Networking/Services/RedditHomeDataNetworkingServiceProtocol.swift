@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 protocol RedditHomeDataNetworkingProtocol {
     func getHomeData() async -> Result<RedditResponse, Error>
 }

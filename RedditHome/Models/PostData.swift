@@ -15,7 +15,6 @@ struct PostData: Codable {
     let ups: Int
     let thumbnail: String
     let created: Int
-    let likes: Int?
     let id: String
     let author: String
     let num_comments: Int

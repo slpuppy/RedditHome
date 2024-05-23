@@ -14,6 +14,8 @@ protocol RedditHomeViewModelProtocol {
 
 class RedditHomeViewModel: RedditHomeViewModelProtocol {
     
+    // MARK: Properties
+    
     let networkingService: RedditHomeDataNetworkingProtocol
     
     var posts: [RedditPost] = []
