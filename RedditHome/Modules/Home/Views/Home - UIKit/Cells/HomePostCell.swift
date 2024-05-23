@@ -191,7 +191,6 @@ class HomePostCell: UICollectionViewCell {
             imageHeightConstraint?.isActive = true
             setNeedsLayout()
             layoutIfNeeded()
-            delegate?.didLoadImage()
             return
         }
         

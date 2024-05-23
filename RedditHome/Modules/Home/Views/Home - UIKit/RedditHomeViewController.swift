@@ -86,7 +86,8 @@ class RedditHomeViewController: UIViewController {
             section.interGroupSpacing = 16
             section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 16, trailing: 16)
             
-            let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(60)) // Adjust the height as needed
+            let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(60))
+            
             let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
             
             section.boundarySupplementaryItems = [header]
@@ -134,8 +135,6 @@ class RedditHomeViewController: UIViewController {
             self.collectionView.reloadSections(.init(integer: 0))
         }, completion: nil)
     }
-    
-    
 }
 
 // MARK: Delegate methods
