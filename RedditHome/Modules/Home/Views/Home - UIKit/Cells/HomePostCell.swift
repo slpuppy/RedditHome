@@ -79,8 +79,6 @@ class HomePostCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 10
-        imageView.setContentHuggingPriority(.defaultLow, for: .vertical)
-        imageView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -124,8 +122,6 @@ class HomePostCell: UICollectionViewCell {
         return stackView
     }()
     
-    private var imageHeightConstraint: NSLayoutConstraint?
-    
     // MARK: - Initialization
     
     override init(frame: CGRect) {
@@ -164,7 +160,6 @@ class HomePostCell: UICollectionViewCell {
             contentStackView.topAnchor.constraint(equalTo: upVotesStackView.bottomAnchor, constant: 12),
             contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            contentStackView.bottomAnchor.constraint(equalTo: commentsStackView.topAnchor, constant: -16)
         ])
         
         NSLayoutConstraint.activate([
@@ -178,19 +173,27 @@ class HomePostCell: UICollectionViewCell {
     //MARK: Private Methods
 
     private func configureLabels(with postData: PostData) {
+        
+        let attributedText = NSMutableAttributedString()
+
+        let authorText = NSAttributedString(string: "\(postData.author) at", attributes: [.font: UIFont.systemFont(ofSize: 12)])
+        attributedText.append(authorText)
+        let subredditText = NSAttributedString(string: " r/\(postData.subreddit)", attributes: [.font: UIFont.boldSystemFont(ofSize: 12)])
+        attributedText.append(subredditText)
+        
+        authorLabel.attributedText = attributedText
+        
         titleLabel.text = postData.title
-        authorLabel.text = "\(postData.author) at r/\(postData.subreddit)"
         upVotesLabel.text = "\(postData.ups)"
         commentsLabel.text = "\(postData.num_comments) comments"
     }
 
+
+    private var imageHeightConstraint: NSLayoutConstraint?
+    
     private func configureImageView(with thumbnail: String) {
         guard let url = URL(string: thumbnail), !["self", "default"].contains(thumbnail) else {
             imageView.isHidden = true
-            imageHeightConstraint = imageView.heightAnchor.constraint(equalToConstant: 0)
-            imageHeightConstraint?.isActive = true
-            setNeedsLayout()
-            layoutIfNeeded()
             return
         }
         
@@ -200,8 +203,6 @@ class HomePostCell: UICollectionViewCell {
             let aspectRatio = image.size.height / image.size.width
             imageHeightConstraint = imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: aspectRatio)
             imageHeightConstraint?.isActive = true
-            setNeedsLayout()
-            layoutIfNeeded()
             delegate?.didLoadImage()
         }
     }
